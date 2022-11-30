@@ -45,5 +45,5 @@ func handler(w http.ResponseWriter, req *http.Request) {
 
 func ping(w http.ResponseWriter, req *http.Request) {
 	hostname, _ := os.Hostname()
-	_, _ = io.WriteString(w, hostname)
+	_, _ = io.WriteString(w, "The host name is "+hostname)
 }
