@@ -1,6 +1,7 @@
 package api
 
 import (
+	"encoding/json"
 	"gcp-hackathon-cloud-run/types"
 	"log"
 )
@@ -15,7 +16,8 @@ const (
 var playground = [][]string{}
 
 func Play(input types.ArenaUpdate) string {
-	log.Printf("IN: %#v", input)
+	jstr, _ := json.Marshal(input)
+	log.Println(string(jstr))
 
 	commands := []string{"F", "R", "L", "T"}
 	//rand := rand2.Intn(4)
