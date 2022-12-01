@@ -89,14 +89,14 @@ func findPlayerNearBy(self types.PlayerState) string {
 }
 
 func hasPlayer(x, y int) bool {
-	if x < 0 || y < 0 {
+	if x < 0 || y < 0 || x >= len(playground) || y >= len(playground[0]) {
 		return false
 	}
 	return playground[x][y]
 }
 
 func hasBlockToMove(x, y int) string {
-	if x < 0 || y < 0 {
+	if x < 0 || y < 0 || x >= len(playground) || y >= len(playground[0]) {
 		return LEFT
 	}
 	if !playground[x][y] {
