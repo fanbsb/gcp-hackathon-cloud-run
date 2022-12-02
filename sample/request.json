@@ -1,0 +1,92 @@
+{
+  "_links": {
+    "self": {
+      "href": "https://gcp-hackathon-cloud-run-3ioxqvrgga-uw.a.run.app"
+    }
+  },
+  "arena": {
+    "dims": [
+      10,
+      7
+    ],
+    "state": {
+      "https://cloud-run-hackathon-go-1-pkqx6rxn2q-uc.a.run.app": {
+        "x": 6,
+        "y": 4,
+        "direction": "S",
+        "wasHit": false,
+        "score": -108
+      },
+      "https://cloud-run-hackathon-go-2-pkqx6rxn2q-uc.a.run.app": {
+        "x": 4,
+        "y": 6,
+        "direction": "N",
+        "wasHit": false,
+        "score": 464
+      },
+      "https://cloud-run-hackathon-go-pkqx6rxn2q-uc.a.run.app": {
+        "x": 4,
+        "y": 3,
+        "direction": "N",
+        "wasHit": true,
+        "score": 465
+      },
+      "https://cloud-run-hackathon-java-springboot-a24yt6ggya-uc.a.run.app": {
+        "x": 7,
+        "y": 1,
+        "direction": "N",
+        "wasHit": false,
+        "score": -634
+      },
+      "https://cloud-run-hackathon-java-springboot-in5llypuja-uc.a.run.app": {
+        "x": 7,
+        "y": 5,
+        "direction": "W",
+        "wasHit": false,
+        "score": -49
+      },
+      "https://cloud-run-hackathon-java-springboot-lfr2jss3tq-uc.a.run.app": {
+        "x": 5,
+        "y": 3,
+        "direction": "W",
+        "wasHit": false,
+        "score": 442
+      },
+      "https://cloud-run-hackathon-java-springboot-pkqx6rxn2q-uc.a.run.app": {
+        "x": 8,
+        "y": 3,
+        "direction": "W",
+        "wasHit": false,
+        "score": -168
+      },
+      "https://cloud-run-hackathon-java-springboot-tw-ce-tsxbksy6yq-uc.a.run.app": {
+        "x": 0,
+        "y": 0,
+        "direction": "E",
+        "wasHit": false,
+        "score": 143
+      },
+      "https://cloud-run-hackathon-python-e7jflwxriq-uc.a.run.app": {
+        "x": 3,
+        "y": 0,
+        "direction": "N",
+        "wasHit": false,
+        "score": -107
+      },
+      "https://cloud-run-hackathon-python-vyauhuscja-uc.a.run.app/": {
+        "x": 2,
+        "y": 3,
+        "direction": "W",
+        "wasHit": false,
+        "score": -437
+      },
+      "https://gcp-hackathon-cloud-run-3ioxqvrgga-uw.a.run.app": {
+        "x": 7,
+        "y": 4,
+        "direction": "S",
+        "wasHit": false,
+        "score": -11
+      }
+    }
+  }
+}

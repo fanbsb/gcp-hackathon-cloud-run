@@ -2,106 +2,110 @@ package api
 
 import (
 	"gcp-hackathon-cloud-run/types"
+	"sort"
 )
 
-const (
-	// Direction
-	NORTH = "N"
-	SOUTH = "S"
-	WEST  = "W"
-	EAST  = "E"
-
-	// Command
-	FORWARD = "F"
-	LEFT    = "L"
-	RIGHT   = "R"
-	THROW   = "T"
-)
-
-var playground [][]bool
+type position struct {
+	position int
+	score    int
+}
 
 func Play(input types.ArenaUpdate) string {
-	regroup(input.Arena.Dimensions, input.Arena.State)
 
-	return action(input.Arena.State[input.Links.Self.Href])
+	ground := types.InitGround(input.Arena.Dimensions, input.Arena.State)
+
+	myselfData := input.Arena.State[input.Links.Self.Href]
+	myself := types.InitMyself(myselfData.X, myselfData.Y, myselfData.Direction, myselfData.WasHit)
+	return action(myself, ground)
 }
 
-func regroup(ground []int, states map[string]types.PlayerState) {
-	// init the playground
-	playground = make([][]bool, ground[0])
-	for i := 0; i < ground[0]; i++ {
-		playground[i] = make([]bool, ground[1])
+func action(myself *types.Myself, ground *types.Ground) string {
+	// Position
+	var positionSlice []position
+	fHas, fScore := myself.FrontHasPlayer(ground)
+	lHas, lScore := myself.LeftHasPlayer(ground)
+	rHas, rScore := myself.RightHasPlayer(ground)
+	bHas, bScore := myself.BackHasPlayer(ground)
+
+	if fHas {
+		positionSlice = append(positionSlice, position{
+			position: types.FrontSide,
+			score:    fScore,
+		})
+	}
+	if lHas {
+		positionSlice = append(positionSlice, position{
+			position: types.LeftSide,
+			score:    lScore,
+		})
+	}
+	if rHas {
+		positionSlice = append(positionSlice, position{
+			position: types.RightSide,
+			score:    rScore,
+		})
+	}
+	if bHas {
+		positionSlice = append(positionSlice, position{
+			position: types.BackSide,
+			score:    bScore,
+		})
 	}
 
-	// fill the playground
-	for _, v := range states {
-		playground[v.X][v.Y] = true
+	// high score
+	var maxScorePosition int
+	if len(positionSlice) == 0 {
+		maxScorePosition = types.NoPlayer
+	} else {
+		sort.Slice(positionSlice, func(i, j int) bool {
+			return positionSlice[i].score > positionSlice[j].score
+		})
+		maxScorePosition = positionSlice[0].position
 	}
-}
 
-func action(self types.PlayerState) string {
-	// Throw
-	if throw(self) {
-		return THROW
+	// Attack first
+	switch maxScorePosition {
+	case types.FrontSide:
+		return types.THROW
+	case types.LeftSide:
+		return types.LEFT
+	case types.RightSide:
+		return types.RIGHT
+	case types.BackSide:
+		return types.LEFT
+	case types.NoPlayer:
+		//TODO Find Player
 	}
+
 	// Runaway
-	if self.WasHit {
-		return wasHit(self)
-	}
+	//if myself.WasHit() {
+	//	return wasHit(myself, ground)
+	//}
 
-	return findPlayerNearBy(self)
-}
-
-// Find the player and throw
-func throw(self types.PlayerState) bool {
-	switch self.Direction {
-	case NORTH:
-		return hasPlayer(self.X, self.Y-1)
-	case SOUTH:
-		return hasPlayer(self.X, self.Y+1)
-	case WEST:
-		return hasPlayer(self.X-1, self.Y)
-	case EAST:
-		return hasPlayer(self.X+1, self.Y)
-	}
-	return false
+	return findPlayerNearBy(myself, ground)
 }
 
 // Find the player and runaway
-func wasHit(self types.PlayerState) string {
-	switch self.Direction {
-	case NORTH:
-		return hasBlockToMove(self.X, self.Y-1)
-	case SOUTH:
-		return hasBlockToMove(self.X, self.Y+1)
-	case WEST:
-		return hasBlockToMove(self.X-1, self.Y)
-	case EAST:
-		return hasBlockToMove(self.X+1, self.Y)
+func wasHit(myself *types.Myself, ground *types.Ground) string {
+	if myself.CanMoveFront(ground) {
+		return types.FORWARD
+	} else if myself.CanMoveLeft(ground) {
+		return types.LEFT
+	} else if myself.CanMoveRight(ground) {
+		return types.RIGHT
+	} else {
+		return types.LEFT
 	}
-	return ""
 }
 
 // Find Player NearBy
-func findPlayerNearBy(self types.PlayerState) string {
-	//
-	return FORWARD
-}
-
-func hasPlayer(x, y int) bool {
-	if x < 0 || y < 0 || x >= len(playground) || y >= len(playground[0]) {
-		return false
+func findPlayerNearBy(myself *types.Myself, ground *types.Ground) string {
+	if myself.CanMoveFront(ground) {
+		return types.FORWARD
+	} else if myself.CanMoveLeft(ground) {
+		return types.LEFT
+	} else if myself.CanMoveRight(ground) {
+		return types.RIGHT
 	}
-	return playground[x][y]
-}
-
-func hasBlockToMove(x, y int) string {
-	if x < 0 || y < 0 || x >= len(playground) || y >= len(playground[0]) {
-		return LEFT
-	}
-	if !playground[x][y] {
-		return FORWARD
-	} else {
-		return RIGHT
-	}
+	return types.RIGHT
 }
