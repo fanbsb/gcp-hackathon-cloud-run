@@ -64,48 +64,30 @@ func action(myself *types.Myself, ground *types.Ground) string {
 	}
 
 	// Attack first
-	switch maxScorePosition {
-	case types.FrontSide:
+	if maxScorePosition == types.FrontSide {
 		return types.THROW
-	case types.LeftSide:
-		return types.LEFT
-	case types.RightSide:
-		return types.RIGHT
-	case types.BackSide:
-		return types.LEFT
-	case types.NoPlayer:
-		//TODO Find Player
 	}
 
 	// Runaway
-	//if myself.WasHit() {
-	//	return wasHit(myself, ground)
-	//}
+	if myself.WasHit() {
+		switch maxScorePosition {
+		case types.LeftSide:
+			return myself.MoveFront(ground)
+		case types.RightSide:
+			return myself.MoveFront(ground)
+		case types.BackSide:
+			return myself.MoveFront(ground)
+		case types.FrontSide:
+			// Already attack
+		case types.NoPlayer:
+			// Impossible
+		}
+	}
 
 	return findPlayerNearBy(myself, ground)
 }
 
-// Find the player and runaway
-func wasHit(myself *types.Myself, ground *types.Ground) string {
-	if myself.CanMoveFront(ground) {
-		return types.FORWARD
-	} else if myself.CanMoveLeft(ground) {
-		return types.LEFT
-	} else if myself.CanMoveRight(ground) {
-		return types.RIGHT
-	} else {
-		return types.LEFT
-	}
-}
-
 // Find Player NearBy
 func findPlayerNearBy(myself *types.Myself, ground *types.Ground) string {
-	if myself.CanMoveFront(ground) {
-		return types.FORWARD
-	} else if myself.CanMoveLeft(ground) {
-		return types.LEFT
-	} else if myself.CanMoveRight(ground) {
-		return types.RIGHT
-	}
-	return types.RIGHT
+	return myself.MoveFront(ground)
 }

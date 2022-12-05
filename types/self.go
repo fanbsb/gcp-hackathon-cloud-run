@@ -78,7 +78,40 @@ func (m *Myself) RightHasPlayer(ground *Ground) (bool, int) {
 	return false, math.MinInt
 }
 
-func (m *Myself) CanMoveFront(ground *Ground) bool {
+func (m *Myself) MoveFront(ground *Ground) string {
+	if m.canMoveFront(ground) {
+		return FORWARD
+	} else if m.canMoveLeft(ground) {
+		return LEFT
+	} else if m.canMoveRight(ground) {
+		return RIGHT
+	}
+	return RIGHT
+}
+
+func (m *Myself) MoveLeft(ground *Ground) string {
+	if m.canMoveLeft(ground) {
+		return LEFT
+	} else if m.canMoveRight(ground) {
+		return RIGHT
+	} else if m.canMoveFront(ground) {
+		return FORWARD
+	}
+	return RIGHT
+}
+
+func (m *Myself) MoveRight(ground *Ground) string {
+	if m.canMoveRight(ground) {
+		return RIGHT
+	} else if m.canMoveLeft(ground) {
+		return LEFT
+	} else if m.canMoveFront(ground) {
+		return FORWARD
+	}
+	return RIGHT
+}
+
+func (m *Myself) canMoveFront(ground *Ground) bool {
 	switch m.direction {
 	case NORTH:
 		return ground.hasBlockToMove(m.x, m.y-1)
@@ -92,7 +125,7 @@ func (m *Myself) CanMoveFront(ground *Ground) bool {
 	return false
 }
 
-func (m *Myself) CanMoveLeft(ground *Ground) bool {
+func (m *Myself) canMoveLeft(ground *Ground) bool {
 	switch m.direction {
 	case NORTH:
 		return ground.hasBlockToMove(m.x-1, m.y)
@@ -106,7 +139,7 @@ func (m *Myself) CanMoveLeft(ground *Ground) bool {
 	return false
 }
 
-func (m *Myself) CanMoveRight(ground *Ground) bool {
+func (m *Myself) canMoveRight(ground *Ground) bool {
 	switch m.direction {
 	case NORTH:
 		return ground.hasBlockToMove(m.x+1, m.y)
