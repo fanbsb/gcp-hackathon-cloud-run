@@ -14,6 +14,8 @@ func Play(input types.ArenaUpdate) string {
 
 	ground := types.InitGround(input.Arena.Dimensions, input.Arena.State)
 
+	ground.Print()
+
 	myselfData := input.Arena.State[input.Links.Self.Href]
 	myself := types.InitMyself(myselfData.X, myselfData.Y, myselfData.Direction, myselfData.WasHit)
 	return action(myself, ground)

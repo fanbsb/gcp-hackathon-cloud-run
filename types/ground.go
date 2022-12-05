@@ -1,6 +1,9 @@
 package types
 
-import "math"
+import (
+	"log"
+	"math"
+)
 
 type Ground struct {
 	field [][]*int
@@ -78,4 +81,11 @@ func (g *Ground) hasBlockToMove(x, y int) bool {
 		return false
 	}
 	return g.field[x][y] == nil
+}
+
+func (g Ground) Print() {
+	for i := 0; i < len(g.field); i++ {
+		log.Printf("%d\n", g.field[i])
+	}
+	log.Println()
 }
