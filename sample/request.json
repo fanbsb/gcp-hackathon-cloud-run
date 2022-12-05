@@ -1,91 +1,238 @@
 {
   "_links": {
     "self": {
-      "href": "https://gcp-hackathon-cloud-run-3ioxqvrgga-uw.a.run.app"
+      "href": "https://gcp-hackathon-cloud-run-3ioxqvrgga-uc.a.run.app"
     }
   },
   "arena": {
     "dims": [
-      10,
-      7
+      17,
+      12
     ],
     "state": {
-      "https://cloud-run-hackathon-go-1-pkqx6rxn2q-uc.a.run.app": {
+      "https://31c1-116-48-165-103.ngrok.io": {
+        "x": 14,
+        "y": 11,
+        "direction": "E",
+        "wasHit": false,
+        "score": -333
+      },
+      "https://bot-tsxbksy6yq-uc.a.run.app": {
         "x": 6,
-        "y": 4,
+        "y": 1,
+        "direction": "W",
+        "wasHit": false,
+        "score": 7352
+      },
+      "https://cloud-run-hackathon-go-1-pkqx6rxn2q-uc.a.run.app": {
+        "x": 16,
+        "y": 10,
         "direction": "S",
         "wasHit": false,
-        "score": -108
+        "score": -213
       },
       "https://cloud-run-hackathon-go-2-pkqx6rxn2q-uc.a.run.app": {
         "x": 4,
-        "y": 6,
+        "y": 10,
         "direction": "N",
         "wasHit": false,
-        "score": 464
+        "score": -46
+      },
+      "https://cloud-run-hackathon-go-7rxmeiyr7a-uc.a.run.app": {
+        "x": 11,
+        "y": 2,
+        "direction": "N",
+        "wasHit": false,
+        "score": -169
+      },
+      "https://cloud-run-hackathon-go-fanliu-pkqx6rxn2q-uc.a.run.app": {
+        "x": 14,
+        "y": 1,
+        "direction": "W",
+        "wasHit": false,
+        "score": 7444
+      },
+      "https://cloud-run-hackathon-go-juiox7sxjq-uc.a.run.app": {
+        "x": 9,
+        "y": 1,
+        "direction": "S",
+        "wasHit": false,
+        "score": -9925
       },
       "https://cloud-run-hackathon-go-pkqx6rxn2q-uc.a.run.app": {
-        "x": 4,
-        "y": 3,
-        "direction": "N",
+        "x": 9,
+        "y": 2,
+        "direction": "S",
+        "wasHit": false,
+        "score": 6899
+      },
+      "https://cloud-run-hackathon-go-rapj625izq-uc.a.run.app/": {
+        "x": 8,
+        "y": 10,
+        "direction": "S",
         "wasHit": true,
-        "score": 465
-      },
-      "https://cloud-run-hackathon-java-springboot-a24yt6ggya-uc.a.run.app": {
-        "x": 7,
-        "y": 1,
-        "direction": "N",
-        "wasHit": false,
-        "score": -634
-      },
-      "https://cloud-run-hackathon-java-springboot-in5llypuja-uc.a.run.app": {
-        "x": 7,
-        "y": 5,
-        "direction": "W",
-        "wasHit": false,
-        "score": -49
+        "score": -6549
       },
       "https://cloud-run-hackathon-java-springboot-lfr2jss3tq-uc.a.run.app": {
-        "x": 5,
-        "y": 3,
-        "direction": "W",
-        "wasHit": false,
-        "score": 442
-      },
-      "https://cloud-run-hackathon-java-springboot-pkqx6rxn2q-uc.a.run.app": {
-        "x": 8,
-        "y": 3,
-        "direction": "W",
-        "wasHit": false,
-        "score": -168
-      },
-      "https://cloud-run-hackathon-java-springboot-tw-ce-tsxbksy6yq-uc.a.run.app": {
         "x": 0,
-        "y": 0,
-        "direction": "E",
-        "wasHit": false,
-        "score": 143
-      },
-      "https://cloud-run-hackathon-python-e7jflwxriq-uc.a.run.app": {
-        "x": 3,
-        "y": 0,
-        "direction": "N",
-        "wasHit": false,
-        "score": -107
-      },
-      "https://cloud-run-hackathon-python-vyauhuscja-uc.a.run.app/": {
-        "x": 2,
-        "y": 3,
-        "direction": "W",
-        "wasHit": false,
-        "score": -437
-      },
-      "https://gcp-hackathon-cloud-run-3ioxqvrgga-uw.a.run.app": {
-        "x": 7,
         "y": 4,
         "direction": "S",
         "wasHit": false,
-        "score": -11
+        "score": 4765
+      },
+      "https://cloud-run-hackathon-java-springboot-pkqx6rxn2q-uc.a.run.app": {
+        "x": 5,
+        "y": 8,
+        "direction": "S",
+        "wasHit": false,
+        "score": -1039
+      },
+      "https://cloud-run-hackathon-java-springboot-tw-ce-tsxbksy6yq-uc.a.run.app": {
+        "x": 9,
+        "y": 10,
+        "direction": "W",
+        "wasHit": false,
+        "score": 7491
+      },
+      "https://cloud-run-hackathon-nodejs-axl3yiibka-uc.a.run.app": {
+        "x": 5,
+        "y": 1,
+        "direction": "S",
+        "wasHit": true,
+        "score": -3217
+      },
+      "https://cloud-run-hackathon-nodejs-pvkmarto6a-uc.a.run.app": {
+        "x": 4,
+        "y": 7,
+        "direction": "N",
+        "wasHit": false,
+        "score": -1664
+      },
+      "https://cloud-run-hackathon-nodejs-rapj625izq-uc.a.run.app": {
+        "x": 8,
+        "y": 9,
+        "direction": "E",
+        "wasHit": false,
+        "score": -1615
+      },
+      "https://cloud-run-hackathon-nodejs-ukvhcbhg5a-uc.a.run.app": {
+        "x": 9,
+        "y": 3,
+        "direction": "W",
+        "wasHit": true,
+        "score": -4484
+      },
+      "https://cloud-run-hackathon-nodejs-ws75a4cbqa-uc.a.run.app/": {
+        "x": 0,
+        "y": 10,
+        "direction": "E",
+        "wasHit": true,
+        "score": -7547
+      },
+      "https://cloud-run-hackathon-python-e7jflwxriq-uc.a.run.app": {
+        "x": 12,
+        "y": 0,
+        "direction": "N",
+        "wasHit": false,
+        "score": -87
+      },
+      "https://cloud-run-hackathon-python-hx5ruhwpla-uc.a.run.app": {
+        "x": 3,
+        "y": 5,
+        "direction": "W",
+        "wasHit": true,
+        "score": -3506
+      },
+      "https://cloud-run-hackathon-python-k2sbeuoupa-uc.a.run.app": {
+        "x": 9,
+        "y": 6,
+        "direction": "S",
+        "wasHit": false,
+        "score": -3381
+      },
+      "https://cloud-run-hackathon-python-vkx5olae4q-uc.a.run.app": {
+        "x": 5,
+        "y": 11,
+        "direction": "E",
+        "wasHit": false,
+        "score": -45
+      },
+      "https://cloud-run-hackathon-python-vyauhuscja-uc.a.run.app/": {
+        "x": 13,
+        "y": 8,
+        "direction": "W",
+        "wasHit": false,
+        "score": 7510
+      },
+      "https://derrick-bot-tsxbksy6yq-uc.a.run.app": {
+        "x": 11,
+        "y": 1,
+        "direction": "W",
+        "wasHit": true,
+        "score": 7274
+      },
+      "https://gcloud-test-k2sbeuoupa-uc.a.run.app/": {
+        "x": 6,
+        "y": 2,
+        "direction": "E",
+        "wasHit": false,
+        "score": -8473
+      },
+      "https://gcp-hackathon-cloud-run-3ioxqvrgga-uc.a.run.app": {
+        "x": 0,
+        "y": 7,
+        "direction": "S",
+        "wasHit": true,
+        "score": 2763
+      },
+      "https://gcp-hackathon-cloud-run-3ioxqvrgga-uw.a.run.app": {
+        "x": 11,
+        "y": 9,
+        "direction": "E",
+        "wasHit": false,
+        "score": -1375
+      },
+      "https://google-cloud-run-hackathon-qfqvdlcsxa-uc.a.run.app": {
+        "x": 3,
+        "y": 2,
+        "direction": "S",
+        "wasHit": false,
+        "score": 7704
+      },
+      "https://parnassus-x2wnjf2lxq-uc.a.run.app/": {
+        "x": 11,
+        "y": 8,
+        "direction": "N",
+        "wasHit": true,
+        "score": -1844
+      },
+      "https://samsul-z5lfdakqva-uc.a.run.app": {
+        "x": 1,
+        "y": 9,
+        "direction": "W",
+        "wasHit": false,
+        "score": -54
+      },
+      "https://waterfight-practice-2-x2wnjf2lxq-uc.a.run.app": {
+        "x": 4,
+        "y": 5,
+        "direction": "N",
+        "wasHit": false,
+        "score": -3165
+      },
+      "https://waterfight-practice-x2wnjf2lxq-uc.a.run.app": {
+        "x": 16,
+        "y": 0,
+        "direction": "E",
+        "wasHit": false,
+        "score": -386
+      },
+      "https://www.master-7rqtwti-dv3kavhf7enro.us-2.platformsh.site/": {
+        "x": 15,
+        "y": 1,
+        "direction": "E",
+        "wasHit": false,
+        "score": -85
       }
     }
   }

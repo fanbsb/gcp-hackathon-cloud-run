@@ -18,7 +18,8 @@ func InitGround(ground []int, states map[string]PlayerState) *Ground {
 
 	// fill the playground
 	for _, v := range states {
-		field[v.X][v.Y] = &v.Score
+		player := v
+		field[player.X][player.Y] = &player.Score
 	}
 	return &Ground{
 		field: field,
@@ -85,7 +86,7 @@ func (g *Ground) hasBlockToMove(x, y int) bool {
 
 func (g Ground) Print() {
 	for i := 0; i < len(g.field); i++ {
-		log.Printf("%d\n", g.field[i])
+		log.Printf("%v\n", g.field[i])
 	}
 	log.Println()
 }
