@@ -39,8 +39,6 @@ func handler(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	reqJson, _ := json.Marshal(reqBody)
-	log.Println(string(reqJson))
 	resp := api.Play(reqBody)
 	_, _ = io.WriteString(w, resp)
 }
