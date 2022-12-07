@@ -1,11 +1,23 @@
 package types
 
-import "math"
+import (
+	"math"
+	"sort"
+)
 
 type Myself struct {
 	x, y      int
 	direction string
 	wasHit    bool
+
+	enemyL, enemyR, enemyF, enemyB               bool
+	highestScoreAroundMe                         int
+	highestScorePositionX, highestScorePositionY int
+}
+
+type position struct {
+	position int
+	score    int
 }
 
 // InitMyself init the object
@@ -18,11 +30,83 @@ func InitMyself(x, y int, direction string, wasHit bool) *Myself {
 	}
 }
 
+func (m *Myself) InitMyselfInGround(ground *Ground) {
+	// Position
+	var positionSlice []position
+	fHas, fScore := m.frontHasPlayer(ground)
+	lHas, lScore := m.leftHasPlayer(ground)
+	rHas, rScore := m.rightHasPlayer(ground)
+	bHas, bScore := m.backHasPlayer(ground)
+
+	if fHas {
+		positionSlice = append(positionSlice, position{
+			position: FrontSide,
+			score:    fScore,
+		})
+	}
+	if lHas {
+		positionSlice = append(positionSlice, position{
+			position: LeftSide,
+			score:    lScore,
+		})
+	}
+	if rHas {
+		positionSlice = append(positionSlice, position{
+			position: RightSide,
+			score:    rScore,
+		})
+	}
+	if bHas {
+		positionSlice = append(positionSlice, position{
+			position: BackSide,
+			score:    bScore,
+		})
+	}
+
+	// high score
+	var maxScorePosition int
+	if len(positionSlice) == 0 {
+		maxScorePosition = NoPlayer
+	} else {
+		sort.Slice(positionSlice, func(i, j int) bool {
+			return positionSlice[i].score > positionSlice[j].score
+		})
+		maxScorePosition = positionSlice[0].position
+	}
+	m.enemyF = fHas
+	m.enemyL = lHas
+	m.enemyR = rHas
+	m.enemyB = bHas
+	m.highestScoreAroundMe = maxScorePosition
+
+	//TODO Calculate the Highest Score on the ground
+}
+
 func (m *Myself) WasHit() bool {
 	return m.wasHit
 }
 
-func (m *Myself) FrontHasPlayer(ground *Ground) (bool, int) {
+func (m *Myself) EnemyFront() bool {
+	return m.enemyF
+}
+
+func (m *Myself) EnemyLeft() bool {
+	return m.enemyL
+}
+
+func (m *Myself) EnemyRight() bool {
+	return m.enemyR
+}
+
+func (m *Myself) EnemyBack() bool {
+	return m.enemyB
+}
+
+func (m *Myself) HighestPlayerAroundMe() int {
+	return m.highestScoreAroundMe
+}
+
+func (m *Myself) frontHasPlayer(ground *Ground) (bool, int) {
 	switch m.direction {
 	case NORTH:
 		return ground.northPlayer(m.x, m.y)
@@ -36,7 +120,7 @@ func (m *Myself) FrontHasPlayer(ground *Ground) (bool, int) {
 	return false, math.MinInt
 }
 
-func (m *Myself) BackHasPlayer(ground *Ground) (bool, int) {
+func (m *Myself) backHasPlayer(ground *Ground) (bool, int) {
 	switch m.direction {
 	case NORTH:
 		return ground.southPlayer(m.x, m.y)
@@ -50,7 +134,7 @@ func (m *Myself) BackHasPlayer(ground *Ground) (bool, int) {
 	return false, math.MinInt
 }
 
-func (m *Myself) LeftHasPlayer(ground *Ground) (bool, int) {
+func (m *Myself) leftHasPlayer(ground *Ground) (bool, int) {
 	switch m.direction {
 	case NORTH:
 		return ground.westPlayer(m.x, m.y)
@@ -64,7 +148,7 @@ func (m *Myself) LeftHasPlayer(ground *Ground) (bool, int) {
 	return false, math.MinInt
 }
 
-func (m *Myself) RightHasPlayer(ground *Ground) (bool, int) {
+func (m *Myself) rightHasPlayer(ground *Ground) (bool, int) {
 	switch m.direction {
 	case NORTH:
 		return ground.eastPlayer(m.x, m.y)

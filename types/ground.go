@@ -84,6 +84,7 @@ func (g *Ground) hasBlockToMove(x, y int) bool {
 	return g.field[x][y] == nil
 }
 
+// Print For debug purpose, printout the ground matrix
 func (g Ground) Print() {
 	for i := 0; i < len(g.field); i++ {
 		log.Printf("%v\n", g.field[i])

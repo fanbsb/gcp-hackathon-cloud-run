@@ -2,7 +2,6 @@ package api
 
 import (
 	"gcp-hackathon-cloud-run/types"
-	"sort"
 )
 
 type position struct {
@@ -16,72 +15,27 @@ func Play(input types.ArenaUpdate) string {
 
 	myselfData := input.Arena.State[input.Links.Self.Href]
 	myself := types.InitMyself(myselfData.X, myselfData.Y, myselfData.Direction, myselfData.WasHit)
+	myself.InitMyselfInGround(ground)
 	return action(myself, ground)
 }
 
 func action(myself *types.Myself, ground *types.Ground) string {
-	// Position
-	var positionSlice []position
-	fHas, fScore := myself.FrontHasPlayer(ground)
-	lHas, lScore := myself.LeftHasPlayer(ground)
-	rHas, rScore := myself.RightHasPlayer(ground)
-	bHas, bScore := myself.BackHasPlayer(ground)
-
-	if fHas {
-		positionSlice = append(positionSlice, position{
-			position: types.FrontSide,
-			score:    fScore,
-		})
-	}
-	if lHas {
-		positionSlice = append(positionSlice, position{
-			position: types.LeftSide,
-			score:    lScore,
-		})
-	}
-	if rHas {
-		positionSlice = append(positionSlice, position{
-			position: types.RightSide,
-			score:    rScore,
-		})
-	}
-	if bHas {
-		positionSlice = append(positionSlice, position{
-			position: types.BackSide,
-			score:    bScore,
-		})
-	}
-
-	// high score
-	var maxScorePosition int
-	if len(positionSlice) == 0 {
-		maxScorePosition = types.NoPlayer
-	} else {
-		sort.Slice(positionSlice, func(i, j int) bool {
-			return positionSlice[i].score > positionSlice[j].score
-		})
-		maxScorePosition = positionSlice[0].position
-	}
-
-	// Attack first
-	if maxScorePosition == types.FrontSide {
-		return types.THROW
-	}
-
 	// Runaway
 	if myself.WasHit() {
-		switch maxScorePosition {
-		case types.LeftSide:
+		if myself.EnemyBack() || myself.EnemyLeft() || myself.EnemyRight() {
 			return myself.MoveFront(ground)
-		case types.RightSide:
-			return myself.MoveFront(ground)
-		case types.BackSide:
-			return myself.MoveFront(ground)
-		case types.FrontSide:
-			// Already attack
-		case types.NoPlayer:
-			// Impossible
 		}
+	}
+
+	// Attack
+	if myself.HighestPlayerAroundMe() == types.FrontSide {
+		return types.THROW
+	} else if myself.HighestPlayerAroundMe() == types.LeftSide {
+		return myself.MoveLeft(ground)
+	} else if myself.HighestPlayerAroundMe() == types.RightSide {
+		return myself.MoveRight(ground)
+	} else if myself.HighestPlayerAroundMe() == types.BackSide {
+		return myself.MoveRight(ground)
 	}
 
 	return findPlayerNearBy(myself, ground)
