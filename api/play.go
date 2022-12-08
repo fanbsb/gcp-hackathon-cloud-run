@@ -28,7 +28,7 @@ func action(myself *types.Myself, ground *types.Ground) string {
 	}
 
 	// Attack
-	if myself.HighestPlayerAroundMe() == types.FrontSide {
+	if myself.EnemyFront() || myself.HighestPlayerAroundMe() == types.FrontSide {
 		return types.THROW
 	} else if myself.HighestPlayerAroundMe() == types.LeftSide {
 		return myself.MoveLeft(ground)
