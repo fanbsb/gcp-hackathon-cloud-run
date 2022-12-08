@@ -87,11 +87,15 @@ func (g *Ground) hasPlayer(x, y int) (bool, int) {
 	return false, math.MinInt
 }
 
-func (g *Ground) hasBlockToMove(x, y int) bool {
+func (g *Ground) isNotEdge(x, y int) bool {
 	if x < 0 || y < 0 || x >= len(g.field) || y >= len(g.field[0]) {
 		return false
 	}
-	return g.field[x][y] == nil
+	return true
+}
+
+func (g *Ground) hasBlockToMove(x, y int) bool {
+	return g.isNotEdge(x, y) && g.field[x][y] == nil
 }
 
 func (g *Ground) HighestPlayer() (int, int) {

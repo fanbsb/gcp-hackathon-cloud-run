@@ -215,13 +215,13 @@ func (m *Myself) canMoveFront(ground *Ground) bool {
 func (m *Myself) canMoveLeft(ground *Ground) bool {
 	switch m.direction {
 	case NORTH:
-		return ground.hasBlockToMove(m.x-1, m.y)
+		return ground.isNotEdge(m.x-1, m.y)
 	case SOUTH:
-		return ground.hasBlockToMove(m.x+1, m.y)
+		return ground.isNotEdge(m.x+1, m.y)
 	case WEST:
-		return ground.hasBlockToMove(m.x, m.y+1)
+		return ground.isNotEdge(m.x, m.y+1)
 	case EAST:
-		return ground.hasBlockToMove(m.x, m.y-1)
+		return ground.isNotEdge(m.x, m.y-1)
 	}
 	return false
 }
@@ -229,13 +229,13 @@ func (m *Myself) canMoveLeft(ground *Ground) bool {
 func (m *Myself) canMoveRight(ground *Ground) bool {
 	switch m.direction {
 	case NORTH:
-		return ground.hasBlockToMove(m.x+1, m.y)
+		return ground.isNotEdge(m.x+1, m.y)
 	case SOUTH:
-		return ground.hasBlockToMove(m.x-1, m.y)
+		return ground.isNotEdge(m.x-1, m.y)
 	case WEST:
-		return ground.hasBlockToMove(m.x, m.y-1)
+		return ground.isNotEdge(m.x, m.y-1)
 	case EAST:
-		return ground.hasBlockToMove(m.x, m.y+1)
+		return ground.isNotEdge(m.x, m.y+1)
 	}
 	return false
 }
