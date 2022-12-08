@@ -10,9 +10,8 @@ type Myself struct {
 	direction string
 	wasHit    bool
 
-	enemyL, enemyR, enemyF, enemyB               bool
-	highestScoreAroundMe                         int
-	highestScorePositionX, highestScorePositionY int
+	enemyL, enemyR, enemyF, enemyB bool
+	highestScoreAroundMe           int
 }
 
 type position struct {
@@ -80,6 +79,10 @@ func (m *Myself) InitMyselfInGround(ground *Ground) {
 	m.highestScoreAroundMe = maxScorePosition
 
 	//TODO Calculate the Highest Score on the ground
+}
+
+func (m *Myself) MyXY() (int, int) {
+	return m.x, m.y
 }
 
 func (m *Myself) WasHit() bool {
@@ -237,6 +240,58 @@ func (m *Myself) canMoveRight(ground *Ground) bool {
 	return false
 }
 
-func (m *Myself) HigherScorePlayer(ground *Ground) {
+func (m *Myself) MoveNorth(ground *Ground) string {
+	switch m.direction {
+	case NORTH:
+		return m.MoveFront(ground)
+	case SOUTH:
+		return m.MoveRight(ground)
+	case WEST:
+		return m.MoveRight(ground)
+	case EAST:
+		return m.MoveLeft(ground)
+	}
+	return RIGHT
+}
 
+func (m *Myself) MoveSouth(ground *Ground) string {
+	switch m.direction {
+	case NORTH:
+		return m.MoveRight(ground)
+	case SOUTH:
+		return m.MoveFront(ground)
+	case WEST:
+		return m.MoveLeft(ground)
+	case EAST:
+		return m.MoveRight(ground)
+	}
+	return RIGHT
+}
+
+func (m *Myself) MoveWest(ground *Ground) string {
+	switch m.direction {
+	case NORTH:
+		return m.MoveLeft(ground)
+	case SOUTH:
+		return m.MoveRight(ground)
+	case WEST:
+		return m.MoveFront(ground)
+	case EAST:
+		return m.MoveRight(ground)
+	}
+	return RIGHT
+}
+
+func (m *Myself) MoveEast(ground *Ground) string {
+	switch m.direction {
+	case NORTH:
+		return m.MoveRight(ground)
+	case SOUTH:
+		return m.MoveLeft(ground)
+	case WEST:
+		return m.MoveRight(ground)
+	case EAST:
+		return m.MoveFront(ground)
+	}
+	return RIGHT
 }

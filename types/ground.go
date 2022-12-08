@@ -7,6 +7,8 @@ import (
 
 type Ground struct {
 	field [][]*int
+
+	highestScoreX, highestScoreY int
 }
 
 // InitGround init the playground
@@ -16,13 +18,21 @@ func InitGround(ground []int, states map[string]PlayerState) *Ground {
 		field[i] = make([]*int, ground[1])
 	}
 
+	highestScore := 0
+	var highestX, highestY int
 	// fill the playground
 	for _, v := range states {
 		player := v
 		field[player.X][player.Y] = &player.Score
+
+		if player.Score >= highestScore {
+			highestX, highestY = player.X, player.Y
+		}
 	}
 	return &Ground{
-		field: field,
+		field:         field,
+		highestScoreX: highestX,
+		highestScoreY: highestY,
 	}
 }
 
@@ -82,6 +92,10 @@ func (g *Ground) hasBlockToMove(x, y int) bool {
 		return false
 	}
 	return g.field[x][y] == nil
+}
+
+func (g *Ground) HighestPlayer() (int, int) {
+	return g.highestScoreX, g.highestScoreY
 }
 
 // Print For debug purpose, printout the ground matrix

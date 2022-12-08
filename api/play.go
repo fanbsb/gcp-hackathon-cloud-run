@@ -43,5 +43,31 @@ func action(myself *types.Myself, ground *types.Ground) string {
 
 // Find Player NearBy
 func findPlayerNearBy(myself *types.Myself, ground *types.Ground) string {
-	return myself.MoveFront(ground)
+	// find the highest score
+	mx, my := myself.MyXY()
+	hx, hy := ground.HighestPlayer()
+
+	// find direction
+	var direction string
+	if hx > mx {
+		direction = types.EAST
+	} else if hx < mx {
+		direction = types.WEST
+	} else if hy > my {
+		direction = types.SOUTH
+	} else {
+		direction = types.NORTH
+	}
+
+	switch direction {
+	case types.NORTH:
+		return myself.MoveNorth(ground)
+	case types.SOUTH:
+		return myself.MoveSouth(ground)
+	case types.WEST:
+		return myself.MoveWest(ground)
+	case types.EAST:
+		return myself.MoveEast(ground)
+	}
+	return myself.MoveNorth(ground)
 }
